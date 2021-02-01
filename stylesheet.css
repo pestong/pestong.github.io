@@ -4,7 +4,9 @@
 .header-logo{
  font-size:20px;
  font-family:"Avenir Next";
+ padding:40px;
 }
 .header li{
  float:left;
+ padding:20px;
 }
