@@ -16,7 +16,7 @@ li{
     float:left;
 }
 
-header {
+.header {
     background-color: #ff7;
     opacity:0.9;
     height:90px;
@@ -44,6 +44,6 @@ header {
     padding:0 20px;
 }
 
-footer {
+.footer {
     background-color: #fff;
 }
