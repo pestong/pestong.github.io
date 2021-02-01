@@ -1,6 +1,10 @@
 .header{
  background-color:#ffbb88;
 }
+.header-logo{
+ font-size:20px;
+ font-family:"Avenir Next";
+}
 .header li{
  float:left;
 }
