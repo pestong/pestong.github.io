@@ -9,4 +9,9 @@
 .header li{
  float:left;
  padding:20px;
+ list-style:none;
+}
+
+.footer{
+ background-color:#4499ff;
 }
