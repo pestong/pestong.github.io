@@ -1,5 +1,7 @@
 li {
- color:#0000ff; 
+ color:#0000ff;
+ float:left;
+ 
 }
 p {
  color:#ff0000;
