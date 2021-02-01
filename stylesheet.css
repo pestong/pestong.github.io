@@ -11,9 +11,21 @@ body {
     background-color: #ffd;
 }
 
-.header {
+li{
+    list-style: none;
+    float:left;
+}
+
+header {
     background-color: #ff7;
     opacity:0.9;
+    height:90px;
+    
+}
+
+.header-main{
+    width:300px;
+    margin:0 auto;
 }
 
 .header-logo {
@@ -22,13 +34,16 @@ body {
     text-align:center;
 }
 
-.header li {
-    float: left;
-    padding: 20px;
-    list-style: none;
-    text-align:center;
+.header-list {
+    font-size:10px;
+    width:200px;
+    margin:0 auto;
 }
 
-.footer {
-    background-color: #4499ff;
+.header li{
+    padding:0 20px;
+}
+
+footer {
+    background-color: #fff;
 }
