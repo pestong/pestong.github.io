@@ -1,10 +1,10 @@
 <html>
 <head>
-  <title>setInterval Demo2</title>
+  <title>setInterval Demo</title>
 </head>
 <body>
   <header>
-    test2
+    test3
   </header>
   <div id="writehere"></div>
   <script>
@@ -12,11 +12,11 @@
   function countup(){
     count++;
     writehere.innerHTML=count;
-    if(count >= 4){
-      clearInterval(countup);
-    }
   }
   var set = setInterval(countup,1000);
+  if(count >= 4){
+    clearInterval(countup);
+  }
   </script>
 </body>
 </html>
