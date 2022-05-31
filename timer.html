@@ -14,8 +14,12 @@
     <option value=4>13000歩族</option>
     <option value=5>18000歩族</option>
   </select>
-  <br><input type="text" id="input_lv" value="">
-  <br><input type="text" id="input_ct" value="">
+  <div class="flex">
+    <input type="text" size="2" id="input_lv" value="1">:開始レベル
+  </div>
+  <div class="flex">
+    <input type="text" size="2" id="input_ct" value="2">:次レベルまであと
+  </div>
   <div class="flex">
     レベル:<div id="display_lv"></div>
   </div>
@@ -33,6 +37,7 @@
     [3,4,3,4,4,3,4,4,4,4,4,4,4,4,4,5,4,5,4,5,5,4,5,5,5,6,5,5,5,6,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,8,7,8],
     [4,4,4,4,5,4,4,5,4,5,5,5,5,4,6,5,5,5,6,5,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,7,8,7,8,8,8,8,8,8,8,9,9,9]
   ];
+  let startCount = 0;
   let count = 0;
   let level = 1;
   display_lv.innerHTML=level;
@@ -40,6 +45,14 @@
 
   function countup(){
     const stepSelect = document.getElementById('step_select');
+    let start_check = 0;
+    let number_check = 1;
+    for(const elem of step[stepSelect.value-1]){
+      start_check = document.getElementById("input_lv").value;
+      if(number_check===start_check){}
+      if(start_check<=1) break;
+      start_check--;
+    }
     level=1;
     count++;
     let level_check = count;
