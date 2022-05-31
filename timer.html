@@ -1,16 +1,19 @@
 <html>
-  <head>
-    <title>setInterval Demo</title>
-  </head>
-  <body>
-      <div id="writehere"></div>
-    <script>
-      var count = 0;
-      function countup(){
-          count++;
-        writehere.innerHTML=count;
-      }
-    var set = setInterval(countup,1000);
-    </script>
-  </body>
+<head>
+  <title>setInterval Demo</title>
+</head>
+<body>
+  <div id="writehere"></div>
+  <script>
+  var count = 0;
+  function countup(){
+    count++;
+    writehere.innerHTML=count;
+    if(count >= 4){
+      clearInterval(countup);
+    }
+  }
+  var set = setInterval(countup,1000);
+  </script>
+</body>
 </html>
