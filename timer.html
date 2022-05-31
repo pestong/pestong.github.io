@@ -1,21 +1,63 @@
 <html>
-  <head>
-    <title>setInterval Demo</title>
-  </head>
-  <body>
-    <header>
-      test4
-    </header>
-      <div id="writehere"></div>
-    <script>
-      var count = 0;
-      var countup = setInterval(function(){
-          count++;
-        writehere.innerHTML=count;
-                    if(count >= 9){
-             clearInterval(countup);
-             }
-      } ,1000);
-    </script>
-  </body>
+<head>
+  <title>setInterval Demo</title>
+  <link rel="stylesheet" href="stylesheet2.css">
+</head>
+<body>
+  <header>
+    Level Check
+  </header>
+  <select name="step" id="step_select">
+    <option value=1>5000歩族</option>
+    <option value=2>7000歩族</option>
+    <option value=3>10000歩族</option>
+    <option value=4>13000歩族</option>
+    <option value=5>18000歩族</option>
+  </select>
+  <br><input type="text" id="input_lv" value="">
+  <br><input type="text" id="input_ct" value="">
+  <div class="flex">
+    レベル:<div id="display_lv"></div>
+  </div>
+  <div class="flex">
+    戦闘回数:<div id="display_ct"></div>
+  </div>
+  <input type="button" onclick="countup()" value="カウント">
+  <input type="button" onclick="reset()" value="リセット">
+
+  <script>
+  const step =[
+    [2,2,2,2,2,3,2,2,2,3,2,2,3,2,3,2,3,3,2,3,3,3,3,2,3,3,4,3,3,3,3,4,3,4,3,4,3,4,4,3,4,4,4,4,4,5,4,4,5],
+    [2,3,2,3,2,3,3,2,3,3,3,3,3,2,4,3,3,3,3,3,4,3,4,3,4,3,4,4,4,3,4,4,4,5,4,4,4,5,4,5,5,4,5,5,5,5,5,5,6],
+    [3,3,3,2,3,4,3,3,3,3,4,3,3,4,3,4,4,3,4,4,4,4,4,4,4,4,5,4,4,5,4,5,5,5,5,5,5,5,5,5,6,5,6,6,5,6,6,6,7],
+    [3,4,3,4,4,3,4,4,4,4,4,4,4,4,4,5,4,5,4,5,5,4,5,5,5,6,5,5,5,6,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,8,7,8],
+    [4,4,4,4,5,4,4,5,4,5,5,5,5,4,6,5,5,5,6,5,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,7,8,7,8,8,8,8,8,8,8,9,9,9]
+  ];
+  let count = 0;
+  let level = 1;
+  display_lv.innerHTML=level;
+  display_ct.innerHTML=count;
+
+  function countup(){
+    const stepSelect = document.getElementById('step_select');
+    level=1;
+    count++;
+    let level_check = count;
+    for(const elem of step[stepSelect.value-1]){
+      level_check = level_check-elem;
+      if(level_check<0) break;
+      level++;
+    }
+    display_lv.innerHTML=level;
+    display_ct.innerHTML=count;
+  }
+
+  function reset(){
+    count=0;
+    level=1;
+    display_ct.innerHTML=count;
+    display_lv.innerHTML=level;
+  }
+  </script>
+</body>
 </html>
