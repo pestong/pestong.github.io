@@ -1,16 +1,16 @@
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title>PPOPa</title>
-  <link rel="stylesheet" href="stylesheet.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-</head>
-
-<body>
-  <header>
-    abcdTIMERTIMERTIMERccc<span class="fa fa-twitter"></span>
-  </header>
-</body>
-
+  <head>
+    <title>setInterval Demo</title>
+  </head>
+  <body>
+      <div id="writehere"></div>
+    <script>
+      var count = 0;
+      function countup(){
+          count++;
+        writehere.innerHTML=count;
+      }
+    var set = setInterval(countup,1000);
+    </script>
+  </body>
 </html>
