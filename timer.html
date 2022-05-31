@@ -1,22 +1,21 @@
 <html>
-<head>
-  <title>setInterval Demo</title>
-</head>
-<body>
-  <header>
-    test3
-  </header>
-  <div id="writehere"></div>
-  <script>
-  var count = 0;
-  function countup(){
-    count++;
-    writehere.innerHTML=count;
-  }
-  var set = setInterval(countup,1000);
-  if(count >= 4){
-    clearInterval(countup);
-  }
-  </script>
-</body>
+  <head>
+    <title>setInterval Demo</title>
+  </head>
+  <body>
+    <header>
+      test4
+    </header>
+      <div id="writehere"></div>
+    <script>
+      var count = 0;
+      var countup = setInterval(function(){
+          count++;
+        writehere.innerHTML=count;
+                    if(count >= 9){
+             clearInterval(countup);
+             }
+      } ,1000);
+    </script>
+  </body>
 </html>
