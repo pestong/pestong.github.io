@@ -12,6 +12,11 @@ let battle = 0;
 let level = 1;
 let need = 0;
 let needAll = 150;
+let time = 0;
+let timerID;
+let blinkTime = 0;
+let blinkID;
+display();
 
 function display(){
   stepSelect = document.getElementById('step_select');
@@ -22,6 +27,7 @@ function display(){
   display_ct.innerHTML=count;
   display_need.innerHTML=need;
   display_needall.innerHTML=needAll;
+  display_sec.innerHTML=time;
 }
 
 function selectChange(){
@@ -62,14 +68,61 @@ function checkExp(){
 function countup(){
   count++;
   display();
+  setTimer();
+  clearBlink();
 }
 
 function countdown(){
-  count--;
-  display();
+  if(count>0){
+    count--;
+    display();
+  }
 }
 
 function reset(){
   count=0;
   display();
+  clearTimer();
+  clearBlink();
+}
+
+function timer(){
+  time--;
+  display_sec.innerHTML=time;
+  if(time===0){
+    clearTimer();
+    blinkTime = 15;
+    blink();
+  }
+}
+
+function clearTimer(){
+  time = document.getElementById("input_sec").value
+  display_sec.innerHTML=time;
+  clearInterval(timerID);
+}
+
+function setTimer(){
+  clearTimer();
+  timerID = setInterval(timer, 1000);
+}
+
+function clearBlink(){
+  clearTimeout(blinkID);
+  obj = document.getElementsByTagName("body");
+  obj[0].style.backgroundColor = "#FFFFFF";
+}
+
+function blink() {
+  obj = document.getElementsByTagName("body");
+  obj[0].style.backgroundColor = "#FF0000";
+  blinkTime--;
+  blinkID = setTimeout("blink2()", 100);
+}
+
+function blink2() {
+  obj = document.getElementsByTagName("body");
+  obj[0].style.backgroundColor = "#FFFFFF";
+  blinkTime--;
+  if(blinkTime>0){blinkID = setTimeout("blink()", 100);}
 }

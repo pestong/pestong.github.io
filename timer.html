@@ -4,13 +4,12 @@
   <link rel="stylesheet" href="stylesheet2.css">
 </head>
 <body>
-  <script src="main.js"></script>
   <header>
     Level Check
   </header>
   <input type="button" onclick="reset()" value="リセット">
-  <br>
-  <br>
+  <br><br>
+
   <select name="step" id="step_select" onchange="selectChange()">
     <option value=1>5000歩族</option>
     <option value=2>7000歩族</option>
@@ -25,11 +24,10 @@
     <input type="text" size="2" id="input_ct" value="2">:次レベルまであと
   </div>
   <br>
+
   <div class="flex">
     レベル:<div id="display_lv"></div>
   </div>
-
-
   <div class="flex">
     レベル50まであと:<div id="display_need"></div>回
   </div>
@@ -41,6 +39,13 @@
     <input type="button" onclick="countdown()" value="-">
   </div>
   <input type="button" onclick="countup()" value="カウント">
+  <div class="flex">
+    タイマー:<div id="display_sec"></div>秒
+  </div>
+  <br>
 
+  <input type="text" size="3" id="input_sec" value="23">秒
+
+  <script src="main.js"></script>
 </body>
 </html>
