@@ -71,7 +71,7 @@ function countup(){
   setTimer();
   clearBlink();
   obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = "#ffffbf";
+  obj[0].style.backgroundColor = document.getElementById('input_color').value;
 }
 
 function countdown(){
@@ -93,7 +93,7 @@ function timer(){
   display_sec.innerHTML=time;
   if(time===0){
     clearTimer();
-    blinkTime = 15;
+    blinkTime = document.getElementById("input_blinktime").value;
     blink();
   }
 }
@@ -117,7 +117,7 @@ function clearBlink(){
 
 function blink() {
   obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = "#ffffbf";
+  obj[0].style.backgroundColor = document.getElementById('input_color').value;
   blinkTime--;
   blinkID = setTimeout("blink2()", 100);
 }
