@@ -4,10 +4,14 @@
   <link rel="stylesheet" href="stylesheet2.css">
 </head>
 <body>
+  <script src="main.js"></script>
   <header>
     Level Check
   </header>
-  <select name="step" id="step_select">
+  <input type="button" onclick="reset()" value="リセット">
+  <br>
+  <br>
+  <select name="step" id="step_select" onchange="selectChange()">
     <option value=1>5000歩族</option>
     <option value=2>7000歩族</option>
     <option value=3>10000歩族</option>
@@ -20,57 +24,23 @@
   <div class="flex">
     <input type="text" size="2" id="input_ct" value="2">:次レベルまであと
   </div>
+  <br>
   <div class="flex">
     レベル:<div id="display_lv"></div>
   </div>
+
+
   <div class="flex">
-    戦闘回数:<div id="display_ct"></div>
+    レベル50まであと:<div id="display_need"></div>回
+  </div>
+  <div class="flex">
+    戦闘回数:<div id="display_bt"></div>/<div id="display_needall"></div>
+  </div>
+  <div class="flex">
+    カウント数:<div id="display_ct"></div>
+    <input type="button" onclick="countdown()" value="-">
   </div>
   <input type="button" onclick="countup()" value="カウント">
-  <input type="button" onclick="reset()" value="リセット">
 
-  <script>
-  const step =[
-    [2,2,2,2,2,3,2,2,2,3,2,2,3,2,3,2,3,3,2,3,3,3,3,2,3,3,4,3,3,3,3,4,3,4,3,4,3,4,4,3,4,4,4,4,4,5,4,4,5],
-    [2,3,2,3,2,3,3,2,3,3,3,3,3,2,4,3,3,3,3,3,4,3,4,3,4,3,4,4,4,3,4,4,4,5,4,4,4,5,4,5,5,4,5,5,5,5,5,5,6],
-    [3,3,3,2,3,4,3,3,3,3,4,3,3,4,3,4,4,3,4,4,4,4,4,4,4,4,5,4,4,5,4,5,5,5,5,5,5,5,5,5,6,5,6,6,5,6,6,6,7],
-    [3,4,3,4,4,3,4,4,4,4,4,4,4,4,4,5,4,5,4,5,5,4,5,5,5,6,5,5,5,6,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,8,7,8],
-    [4,4,4,4,5,4,4,5,4,5,5,5,5,4,6,5,5,5,6,5,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,7,8,7,8,8,8,8,8,8,8,9,9,9]
-  ];
-  let startCount = 0;
-  let count = 0;
-  let level = 1;
-  display_lv.innerHTML=level;
-  display_ct.innerHTML=count;
-
-  function countup(){
-    const stepSelect = document.getElementById('step_select');
-    let start_check = 0;
-    let number_check = 1;
-    for(const elem of step[stepSelect.value-1]){
-      start_check = document.getElementById("input_lv").value;
-      if(number_check===start_check){}
-      if(start_check<=1) break;
-      start_check--;
-    }
-    level=1;
-    count++;
-    let level_check = count;
-    for(const elem of step[stepSelect.value-1]){
-      level_check = level_check-elem;
-      if(level_check<0) break;
-      level++;
-    }
-    display_lv.innerHTML=level;
-    display_ct.innerHTML=count;
-  }
-
-  function reset(){
-    count=0;
-    level=1;
-    display_ct.innerHTML=count;
-    display_lv.innerHTML=level;
-  }
-  </script>
 </body>
 </html>
