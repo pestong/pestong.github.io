@@ -70,6 +70,8 @@ function countup(){
   display();
   setTimer();
   clearBlink();
+  obj = document.getElementsByTagName("body");
+  obj[0].style.backgroundColor = "#ffffbf";
 }
 
 function countdown(){
@@ -115,7 +117,7 @@ function clearBlink(){
 
 function blink() {
   obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = "#FF0000";
+  obj[0].style.backgroundColor = "#ffffbf";
   blinkTime--;
   blinkID = setTimeout("blink2()", 100);
 }
