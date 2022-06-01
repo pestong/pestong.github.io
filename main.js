@@ -103,6 +103,7 @@ function clearTimer(){
 }
 
 function setTimer(){
+  clearTimer();
   timerID = setInterval(timer, 1000);
 }
 
