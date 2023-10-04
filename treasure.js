@@ -2,8 +2,9 @@ function testFunction() {
   display_id2.innerHTML = document.getElementById('input_id2').value;
 }
 
-function input01() {
-  const input = document.getElementById('input_id1').value;
+function input01(elem) {
+  const display_id = 'display_' + elem.id;
+  const input = elem.value;
   let index1 = -1;
   let index2 = -1;
   for (let i = 0; i < csvArray.length; i++) {
@@ -20,6 +21,13 @@ function input01() {
   }
 }
 
+function matchID(){}
+
+function input(elem) {
+  const display_id = 'display_' + elem.id;
+  document.getElementById(display_id).innerHTML = elem.value;
+}
+
 let csv = new XMLHttpRequest();
 csv.open("GET", "data.csv", true);
 csv.send();
@@ -34,6 +42,14 @@ csv.onload = function () {
       csvArray.push(cells);
     }
     display_csv.innerHTML = csvArray;
+    const table = document.getElementById("csvTable");
+    for (let i = 0; i < csvArray.length; i++) {
+      var newRow = table.insertRow();
+      for(let p = 0; p < csvArray[i].length; p++){
+        let cell = newRow.insertCell(p);
+        cell.innerHTML = csvArray[i][p];
+      }
+    }
   } else {
     console.log("CSVファイルの読み込みに失敗しました。");
   }
