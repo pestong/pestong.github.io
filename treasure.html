@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>TreasureMap</title>
-  <link rel="stylesheet" href="stylesheet3.css">
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/skeleton.css" />
   <script src="treasure.js"></script>
 </head>
+
 <body>
-  <header>
-    Map Cheack
-  </header>
+  <div class="container">
+    <header>
+      Map Check
+    </header>
 
-  <div id="display_test"></div>
-  <div id="display_input1"></div>
-  <input type="text" size="20" id="input1" oninput="input(this)">
-  <div id="display_input2"></div>
-  <input type="text" size="20" id="input2" oninput="input(this)">
-  <div id="display_input3"></div>
-  <input type="text" size="20" id="input3" oninput="input(this)">
-  <div id="display_input4"></div>
-  <input type="text" size="20" id="input4" oninput="input(this)">
-  <div id="display_input5"></div>
-  <input type="text" size="20" id="input5" oninput="input(this)">
-  <div id="display_input6"></div>
-  <input type="text" size="20" id="input6" oninput="input(this)">
-  <div id="display_input7"></div>
-  <input type="text" size="20" id="input7" oninput="input(this)">
-  <div id="display_input8"></div>
-  <input type="text" size="20" id="input8" oninput="input(this)">
-  <div id="display_input9"></div>
-  <input type="text" size="20" id="input9" oninput="input(this)">
-  <div id="display_input10"></div>
-  <input type="text" size="20" id="input10" oninput="input(this)">
-  <div id="display_input11"></div>
-  <input type="text" size="20" id="input11" oninput="input(this)">
-  <div id="display_input12"></div>
-  <input type="text" size="20" id="input12" oninput="input(this)">
+    <div id="display_top"></div>
+    <br>
+    <input type="button" onclick="reset()" value="リセット">
+    <br>
+    <br>
+    <div id="display_input1"></div>
+    <input type="text" size="20" id="input1" oninput="input(this)">
+    <div id="display_input2"></div>
+    <input type="text" size="20" id="input2" oninput="input(this)">
+    <div id="display_input3"></div>
+    <input type="text" size="20" id="input3" oninput="input(this)">
+    <div id="display_input4"></div>
+    <input type="text" size="20" id="input4" oninput="input(this)">
+    <div id="display_input5"></div>
+    <input type="text" size="20" id="input5" oninput="input(this)">
+    <div id="display_input6"></div>
+    <input type="text" size="20" id="input6" oninput="input(this)">
+    <div id="display_input7"></div>
+    <input type="text" size="20" id="input7" oninput="input(this)">
+    <div id="display_input8"></div>
+    <input type="text" size="20" id="input8" oninput="input(this)">
+    <div id="display_input9"></div>
+    <input type="text" size="20" id="input9" oninput="input(this)">
+    <div id="display_input10"></div>
+    <input type="text" size="20" id="input10" oninput="input(this)">
+    <div id="display_input11"></div>
+    <input type="text" size="20" id="input11" oninput="input(this)">
+    <div id="display_input12"></div>
+    <input type="text" size="20" id="input12" oninput="input(this)">
 
-  <br>
-  <input type="button" onclick="result()" value="クリック">
-  <br>
-  <input type="button" onclick="reset()" value="リセット">
+    <br>
+    <br>
+    <input type="button" onclick="result()" value="クリック">
 
-  <div id="table_result"></div>
-  <table id="csvTable" border="1">
-    <tr>
-      <th>名前</th>
-      <th>見かけやすさ</th>
-      <th>サイズ</th>
-      <th>系統</th>
-      <th>心珠P</th>
-    </tr>
-  </table>
+    <div id="table_result"></div>
+  </div>
 </body>
+
 </html>
