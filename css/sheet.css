@@ -13,3 +13,18 @@ th, td {
   border: 1px solid black; /* セルの境界線を1ピクセルの黒線で表示 */
   padding: 8px; /* セル内のコンテンツと境界線の間にパディングを追加（任意の値に変更可能） */
 }
+
+@media (max-width: 768px) {
+  textarea {
+      width: 100%; /* 画面幅に合わせてテキストエリアの幅を調整 */
+  }
+}
+
+textarea {
+  width: 100%; /* 画面幅に合わせてテキストエリアの幅を調整 */
+  line-height: 2;
+}
+
+.test {
+  display: flex;
+}
