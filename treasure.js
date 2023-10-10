@@ -59,26 +59,8 @@ function input(elem) {
       table.rows[i].cells[0].innerHTML = '未入力'
     }
   }
+  console.log(inputArray)
 }
-
-// function input(elem) {
-//   const display = document.getElementById('display_' + elem.id);
-//   const num = parseInt(elem.id.replace('input', ''));
-//   if (elem.value === '') {
-//     inputArray[num - 1] = -1
-//     display.innerHTML = '未入力'
-//     return
-//   }
-//   const index = matchID(elem.value);
-//   if (index === -1) {
-//     inputArray[num - 1] = -1
-//     display.innerHTML = '該当なし'
-//     return
-//   }
-//   display.innerHTML = csvArray[index][1]
-//   inputArray[num - 1] = index
-//   console.log(inputArray)
-// }
 
 function matchID(input) {
   let index = -1
@@ -98,10 +80,9 @@ function matchID(input) {
 }
 
 function reset() {
-  for (let i = 1; i <= 12; i++) {
-    document.getElementById('input' + i).value = ''
-    document.getElementById('display_input' + i).innerHTML = '未入力'
-  }
+  const textarea = document.getElementById('textarea_input')
+  textarea.value = ''
+  input(textarea);
   const container = document.getElementById('table_result');
   if (container.hasChildNodes()) {
     container.removeChild(container.firstChild);
