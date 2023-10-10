@@ -4,13 +4,10 @@ csv.send();
 
 let csvArray = []
 let inputArray = []
-const rareArray = ['とてもよく見かける', 'よく見かける', 'ときどき見かける', 'あまり見かけない', 'めったに見かけない', 'メタル']
+const rareArray = ['とても', 'よく', 'ときどき', 'あまり', 'めったに', 'メタル']
 const etcArray = ['', 'イベント']
-const tableArray1 = ['名前', 'サイズ', '見かけやすさ', 'その他']
+const tableArray1 = ['名前', 'サイズ', '頻度', 'その他']
 const tableArray2 = ['name', 'size', 'rareName', 'etcName']
-for (let i = 0; i < 12; i++) {
-  inputArray.push(-1)
-}
 
 csv.onload = function () {
   if (csv.status === 200) {
@@ -30,32 +27,58 @@ csv.onerror = function () {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  (function () {
-    document.getElementById('display_top').innerHTML = '入力してください'
-    for (let i = 1; i <= 12; i++) {
-      document.getElementById('display_input' + i).innerHTML = '未入力'
-    }
-  })();
+  for (let i = 0; i < 12; i++) {
+    document.getElementById("table_input").rows[i].cells[0].innerHTML = '未入力'
+  }
 });
 
 function input(elem) {
-  const display = document.getElementById('display_' + elem.id);
-  const num = parseInt(elem.id.replace('input', ''));
-  if (elem.value === '') {
-    inputArray[num - 1] = -1
-    display.innerHTML = '未入力'
-    return
+  const table = document.getElementById('table_input');
+  const val = elem.value.split(/\r?\n/);
+  if (val.length > 11) {
+    val.length = 12
+    elem.value = val.join('\n');
   }
-  const index = matchID(elem.value);
-  if (index === -1) {
-    inputArray[num - 1] = -1
-    display.innerHTML = '該当なし'
-    return
+  inputArray = []
+  for (let i = 0; i < 12; i++) {
+    if (i < val.length) {
+      if (val[i] === '') {
+        inputArray[i] = -1
+        table.rows[i].cells[0].innerHTML = '未入力'
+      } else {
+        const index = matchID(val[i]);
+        if (index === -1) {
+          inputArray[i] = -1
+          table.rows[i].cells[0].innerHTML = '該当なし'
+        } else {
+          inputArray[i] = index
+          table.rows[i].cells[0].innerHTML = `${csvArray[index][1]}(${csvArray[index][3]})`
+        }
+      }
+    } else {
+      table.rows[i].cells[0].innerHTML = '未入力'
+    }
   }
-  display.innerHTML = csvArray[index][1]
-  inputArray[num - 1] = index
-  console.log(inputArray)
 }
+
+// function input(elem) {
+//   const display = document.getElementById('display_' + elem.id);
+//   const num = parseInt(elem.id.replace('input', ''));
+//   if (elem.value === '') {
+//     inputArray[num - 1] = -1
+//     display.innerHTML = '未入力'
+//     return
+//   }
+//   const index = matchID(elem.value);
+//   if (index === -1) {
+//     inputArray[num - 1] = -1
+//     display.innerHTML = '該当なし'
+//     return
+//   }
+//   display.innerHTML = csvArray[index][1]
+//   inputArray[num - 1] = index
+//   console.log(inputArray)
+// }
 
 function matchID(input) {
   let index = -1

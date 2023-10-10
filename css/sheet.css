@@ -11,7 +11,7 @@
 
 table {
   border-collapse: collapse; /* セルの境界線を折りたたむ */
-  border: 1px solid #000; /* ボーダーのスタイルと色を設定 */
+  border: 0px solid #000; /* ボーダーのスタイルと色を設定 */
 }
 
 textarea {
