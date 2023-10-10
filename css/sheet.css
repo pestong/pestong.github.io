@@ -5,9 +5,10 @@ body {
 }
 
 .container {
-  max-width: 500px; /* 最大幅を800ピクセルに設定 */
+  max-width: 520px; /* 最大幅を800ピクセルに設定 */
   margin: 0 auto; /* コンテナを水平中央に配置 */
   padding: 20px; /* 必要に応じてパディングを追加 */
+  box-sizing:border-box;
 }
 
 .container_input {
@@ -17,6 +18,7 @@ body {
   flex-direction: row; /* 要素を横方向に並べる */
   padding: 20px; /* 必要に応じてパディングを追加 */
   font-size: 12px;
+  box-sizing:border-box;
 }
 
 table {
@@ -48,4 +50,14 @@ textarea {
   overflow: hidden;
   white-space: nowrap; /* 改行を抑制 */
   overflow-x: hidden;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    max-width: 100%; /* 最大幅を800ピクセルに設定 */
+    margin: 0 auto; /* コンテナを水平中央に配置 */
+    padding: 20px; /* 必要に応じてパディングを追加 */
+    box-sizing:border-box;
+  }
 }
