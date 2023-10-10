@@ -1,30 +1,24 @@
+body {
+  touch-action: manipulation; /* タッチ操作によるズームを無効にする */
+}
+
 .container {
   max-width: 500px; /* 最大幅を800ピクセルに設定 */
   margin: 0 auto; /* コンテナを水平中央に配置 */
   padding: 20px; /* 必要に応じてパディングを追加 */
 }
 
+.container_input {
+  display: flex;
+  flex-direction: row; /* 要素を横方向に並べる */
+}
+
 table {
-  border-collapse: collapse; /* セルの境界線を重ねて表示 */
-  width: 100%; /* テーブルの幅を100%に設定（任意の値に変更可能） */
-}
-
-th, td {
-  border: 1px solid black; /* セルの境界線を1ピクセルの黒線で表示 */
-  padding: 8px; /* セル内のコンテンツと境界線の間にパディングを追加（任意の値に変更可能） */
-}
-
-@media (max-width: 768px) {
-  textarea {
-      width: 100%; /* 画面幅に合わせてテキストエリアの幅を調整 */
-  }
+  border-collapse: collapse; /* セルの境界線を折りたたむ */
+  border: 1px solid #000; /* ボーダーのスタイルと色を設定 */
 }
 
 textarea {
-  width: 100%; /* 画面幅に合わせてテキストエリアの幅を調整 */
-  line-height: 2;
-}
-
-.test {
-  display: flex;
+  resize: none; /* テキストエリアのサイズ変更を禁止 */
+  line-height: calc(200%); /* 高さの12分の1の行間を設定 */
 }

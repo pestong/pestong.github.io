@@ -38,16 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 });
 
-const textarea = document.getElementById('myTextarea');
-
-textarea.addEventListener('input', function () {
-    const inputValue = textarea.value;
-
-    const outputElement = document.getElementById('output');
-
-    outputElement.textContent = '入力内容: ' + inputValue;
-});
-
 function input(elem) {
   const display = document.getElementById('display_' + elem.id);
   const num = parseInt(elem.id.replace('input', ''));
