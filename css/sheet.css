@@ -1,7 +1,3 @@
-body {
-  touch-action: manipulation; /* タッチ操作によるズームを無効にする */
-}
-
 .container {
   max-width: 500px; /* 最大幅を800ピクセルに設定 */
   margin: 0 auto; /* コンテナを水平中央に配置 */
@@ -19,6 +15,7 @@ table {
 }
 
 textarea {
+  touch-action: manipulation; /* タッチ操作によるズームを無効にする */
   resize: none; /* テキストエリアのサイズ変更を禁止 */
   line-height: calc(200%); /* 高さの12分の1の行間を設定 */
 }
