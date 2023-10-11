@@ -27,9 +27,11 @@ csv.onerror = function () {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  const display = []
   for (let i = 0; i < 12; i++) {
-    document.getElementById("table_input").rows[i].cells[0].innerHTML = '未入力'
+    display.push('未入力');
   }
+  document.getElementById('display_input').innerHTML  = display.join('<br>')
 });
 
 window.onload = function () {
@@ -44,33 +46,30 @@ window.onload = function () {
 }
 
 function input(elem) {
-  const table = document.getElementById('table_input');
   const val = elem.value.split(/\r?\n/);
-  // if (val.length > 11) {
-  //   val.length = 12
-  //   elem.value = val.join('\n');
-  // }
   inputArray = []
+  const display = []
   for (let i = 0; i < 12; i++) {
     if (i < val.length) {
       if (val[i] === '') {
         inputArray[i] = -1
-        table.rows[i].cells[0].innerHTML = '未入力'
+        display.push('未入力');
       } else {
         const index = matchID(val[i]);
         if (index === -1) {
           inputArray[i] = -1
-          table.rows[i].cells[0].innerHTML = '該当なし'
+          display.push('該当なし');
         } else {
           inputArray[i] = index
-          table.rows[i].cells[0].innerHTML = `${csvArray[index][1]}(${csvArray[index][3]})`
+          display.push(`${csvArray[index][1]}(${csvArray[index][3]})`);
         }
       }
     } else {
-      table.rows[i].cells[0].innerHTML = '未入力'
+      display.push('未入力');
     }
   }
-  console.log(inputArray)
+  document.getElementById('display_input').innerHTML  = display.join('<br>')
+  console.log(display)
 }
 
 function matchID(input) {

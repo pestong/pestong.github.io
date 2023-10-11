@@ -13,30 +13,20 @@
     <header>
       Map Check
     </header>
+    <br>
     <input type="button" onclick="reset()" value="リセット">
     <br>
     <br>
     <div class="container_input">
-      <table id="table_input" class="table_input">
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-      </table>
-      <textarea id="textarea_input" class="textarea_input" oninput="input(this)"></textarea>
+      <div id="display_input" class="display_input"></div>
+      <div class="space_input"></div>
+      <textarea id="textarea_input" class="textarea_input" placeholder="図鑑No. or 名前を入力" oninput="input(this)"></textarea>
     </div>
     <br>
+    <div class="container_input2">
+      <input type="button" class="button_result" onclick="result()" value="表を作成">
+    </div>
     <br>
-    <input type="button" onclick="result()" value="クリック">
-
     <div id="table_result" class="table_result"></div>
   </div>
 </body>
