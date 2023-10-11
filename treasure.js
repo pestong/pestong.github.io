@@ -12,7 +12,7 @@ const tableArray2 = ['name', 'size', 'rareName', 'etcName']
 csv.onload = function () {
   if (csv.status === 200) {
     let csvText = csv.responseText
-    let lines = csvText.split(/\r\n|\n/);
+    let lines = csvText.split(/\r?\n/);
     for (let i = 0; i < lines.length; i++) {
       let cells = lines[i].split(',');
       csvArray.push(cells);
@@ -32,13 +32,24 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+window.onload = function () {
+  document.getElementById('textarea_input').addEventListener('keydown', function () {
+    if (event.keyCode == 13) {
+      const text = document.getElementById('textarea_input').value.split(/\r?\n/);
+      if (text.length > 11) {
+        event.preventDefault();
+      }
+    }
+  });
+}
+
 function input(elem) {
   const table = document.getElementById('table_input');
   const val = elem.value.split(/\r?\n/);
-  if (val.length > 11) {
-    val.length = 12
-    elem.value = val.join('\n');
-  }
+  // if (val.length > 11) {
+  //   val.length = 12
+  //   elem.value = val.join('\n');
+  // }
   inputArray = []
   for (let i = 0; i < 12; i++) {
     if (i < val.length) {
