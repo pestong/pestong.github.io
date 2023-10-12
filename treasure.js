@@ -8,6 +8,7 @@ const rareArray = ['とても', 'よく', 'ときどき', 'あまり', 'めっ�
 const etcArray = ['', 'イベント']
 const tableArray1 = ['名前', 'サイズ', '頻度', 'その他']
 const tableArray2 = ['name', 'size', 'rareName', 'etcName']
+const colorArray = ['#d6ffd6', '#d6ffff', '#d6d6ff', '#ffd6ff', '#ffd6d6', '#cccccc']
 
 csv.onload = function () {
   if (csv.status === 200) {
@@ -69,7 +70,6 @@ function input(elem) {
     }
   }
   document.getElementById('display_input').innerHTML  = display.join('<br>')
-  console.log(display)
 }
 
 function matchID(input) {
@@ -128,8 +128,13 @@ function result() {
 
   for (const i of resultArray) {
     let newRow = table.insertRow();
+    newRow.style.backgroundColor = colorArray[i.rare-1];
     for (const p of tableArray2) {
       let cell = newRow.insertCell();
+      // if(i[p]==='ドラキー'){
+      //   cell.style.color = '#ff0000';
+      //   cell.style.fontWeight = "bold";
+      // }
       cell.innerHTML = i[p];
     }
   }

@@ -14,8 +14,9 @@
       Map Check
     </header>
     <br>
-    <input type="button" onclick="reset()" value="リセット">
-    <br>
+    <div class="container_button">
+      <input type="button" class="button_reset" onclick="reset()" value="リセット">
+    </div>
     <br>
     <div class="container_input">
       <div id="display_input" class="display_input"></div>
@@ -23,7 +24,7 @@
       <textarea id="textarea_input" class="textarea_input" placeholder="図鑑No. or 名前を入力" oninput="input(this)"></textarea>
     </div>
     <br>
-    <div class="container_input2">
+    <div class="container_button2">
       <input type="button" class="button_result" onclick="result()" value="表を作成">
     </div>
     <br>
