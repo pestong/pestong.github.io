@@ -178,6 +178,8 @@ function result() {
   div2text.appendChild(document.createTextNode(text));
   div2.appendChild(div2text);
   container_score.appendChild(div2);
+
+  container.scrollIntoView()
 }
 
 function check(result) {
@@ -251,7 +253,7 @@ function check(result) {
 
 function label(result) {
   const scoreArray = [
-    `判定不可。入力を確認してください`,
+    `鑑定不可。入力を確認してください`,
     `大量発生の特徴はありません`,
     `が大量発生`,
     `が大量発生（クランベリー型）`,

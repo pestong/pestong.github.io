@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>TreasureMap</title>
+  <title>宝の地図 大量出現鑑定ツール</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <link rel="stylesheet" href="/css/sheet.css" />
   <script src="treasure.js"></script>
@@ -11,30 +11,51 @@
 <body>
   <div class="container">
     <header>
-      Map Check
+      <div class="title">宝の地図 大量出現鑑定ツール</div>
+      <div class="description">ドラクエウォーク宝の地図　出現モンスターの中に大量発生するモンスターが存在するか鑑定します。</div>
     </header>
-    <br>
-    <div class="container_button">
-      <input type="button" class="button_reset" onclick="reset()" value="リセット">
-    </div>
-    <br>
-    <div class="container_button2">
-      <input type="text" size="20" id="input_mapname" class="input_mapname" placeholder="地図名を入力（省略可）">
-    </div>
-    <br>
-    <div class="container_input">
-      <div id="display_input" class="display_input"></div>
-      <div class="space_input"></div>
-      <textarea id="textarea_input" class="textarea_input" placeholder="図鑑No. or 名前を入力" oninput="input(this)"></textarea>
-    </div>
-    <br>
-    <div class="container_button2">
-      <input type="button" class="button_result" onclick="result()" value="表を作成">
-    </div>
-    <br>
-    <div id="table_result" class="table_result"></div>
-    <br>
-    <div id="container_score" class="container_score"></div>
+    <main>
+      <br>
+      <div class="div_reset">
+        <input type="button" class="button" onclick="reset()" value="リセット">
+      </div>
+      <br>
+      <div class="div_mapname">
+        <input type="text" size="26" id="input_mapname" class="input_mapname" placeholder="地図名を入力（省略可）">
+      </div>
+      <br>
+      <div class="div_input">
+        <div id="display_input" class="display_input"></div>
+        <div class="space_input"></div>
+        <textarea id="textarea_input" class="textarea_input" placeholder="図鑑No. or 名前を入力" oninput="input(this)"></textarea>
+      </div>
+      <br>
+      <div class="div_enter">
+        <input type="button" class="button" onclick="result()" value="地図を鑑定">
+      </div>
+      <br>
+      <div class="div_table">
+        <div id="table_result" class="table_result"></div>
+      </div>
+      <br>
+      <div class="div_score">
+        <div id="container_score" class="container_score"></div>
+      </div>
+      <br>
+      <br>
+      <br>
+    </main>
+    <footer>
+      <div class="description">操作説明</div>
+      <ol>
+        <li>宝の地図出現モンスター計１２匹の図鑑ナンバーを入力しましょう。（モンスター名をひらがな入力でもＯＫ！）</li>
+        <li>地図名は入力しなくてもいいですが、入力すると鑑定結果の上に一緒に表示されます。</li>
+        <li>
+          最後に「地図を鑑定」ボタンを押しましょう。<br>
+          鑑定結果が表と一緒に表示されます。スクショして保存したり、地図紹介の時にスクショを一緒に載せるのもいいかもしれません。
+        </li>
+      </ol>
+    </footer>
   </div>
 </body>
 
