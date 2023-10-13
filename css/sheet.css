@@ -88,7 +88,12 @@ td {
   text-overflow: ellipsis; /* テキストがセル内に収まらない場合、省略記号で表示する */
 }
 
-@media screen and (max-width: 520px) {
+.container_score {
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
   .container {
     max-width: 100%; /* 最大幅を800ピクセルに設定 */
     margin: 0 auto; /* コンテナを水平中央に配置 */
