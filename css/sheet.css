@@ -182,7 +182,7 @@ ol {
 }
 
 .button {
-  width: 150px;
+  width: 120px;
   height: 36px;
 
   border: 2px solid var(--color0);
@@ -190,6 +190,8 @@ ol {
 
   background-color: var(--color2);
   color: var(--color5);
+
+  font-family: 'Mochiy Pop P One', sans-serif;
 }
 
 .button:hover {
