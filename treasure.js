@@ -179,7 +179,7 @@ function result() {
   div2.appendChild(div2text);
   container_score.appendChild(div2);
 
-  container.scrollIntoView()
+  document.getElementById('scroll').scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function check(result) {
