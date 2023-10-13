@@ -181,6 +181,11 @@ ol {
   padding-left: var(--padding1);
 }
 
+ul {
+  font-size: var(--fontsize1);
+  padding-left: var(--padding1);
+}
+
 .button {
   width: 120px;
   height: 36px;
