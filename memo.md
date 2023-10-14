@@ -91,3 +91,14 @@ table12cellに各時
 
 inputarray > resultarray
 inputarrayはNo保存　12固定じゃなくていい
+
+
+
+
+
+
+同じモンスターがいた場合に、不可判定
+
+更新情報
+作者情報
+判定の詳細

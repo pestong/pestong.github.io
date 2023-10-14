@@ -176,6 +176,16 @@ footer {
   position: sticky;
 }
 
+.menu {
+  font-size: var(--fontsize1);
+  cursor: pointer;
+}
+
+.menu_description {
+  font-size: var(--fontsize1);
+  display: none;
+}
+
 ol {
   font-size: var(--fontsize1);
   padding-left: var(--padding1);

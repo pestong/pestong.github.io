@@ -9,6 +9,7 @@ const etcArray = ['', 'イベント']
 const tableArray1 = ['名前', 'サイズ', '頻度', 'その他']
 const tableArray2 = ['name', 'size', 'rareName', 'etcName']
 const colorArray = ['#d6ffd6', '#d6ffff', '#d6d6ff', '#ffd6ff', '#ffd6d6', '#cccccc']
+let open = 0
 
 csv.onload = function () {
   if (csv.status === 200) {
@@ -42,6 +43,15 @@ window.onload = function () {
       if (text.length > 11) {
         event.preventDefault();
       }
+    }
+  });
+  document.getElementById('menu').addEventListener('click', function () {
+    if (open === 0) {
+      document.getElementById('menu_description').style.display = 'block';
+      open++;
+    } else {
+      document.getElementById('menu_description').style.display = 'none';
+      open = 0
     }
   });
 }
@@ -196,7 +206,7 @@ function check(result) {
     result.filter(e => e.rare === 1).filter(e => e.size === '1.2倍')
   ]
 
-  if (JSON.stringify(lengthTest) === JSON.stringify(length)) {
+  if (JSON.stringify(lengthTest) === JSON.stringify(length) && result.filter((e, i, arr) => { return arr.findIndex(({ name }) => name === e.name) !== i }).length === 0) {
     if (size[0].length > 1) {
       score[0] = 1
     }
@@ -257,8 +267,8 @@ function label(result) {
     `大量発生の特徴はありません`,
     `が大量発生`,
     `が大量発生（クランベリー型）`,
-    `が大量発生 ただし４匹編成が出現しにくい`,
-    `のみ等倍 大量発生するかは要検証`,
+    `が大量発生。ただし４匹編成が出現しにくい`,
+    `のみ等倍。大量発生するかは要検証。基本的には４匹編成が出現しにくく、レベリング不向きな構成です`,
     `４匹編成が出現しにくく、レベリング不向きな構成です`
   ]
   return scoreArray[result]
