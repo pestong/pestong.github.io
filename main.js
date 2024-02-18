@@ -1,130 +1,299 @@
-const step =[
-  [2,2,2,2,2,3,2,2,2,3,2,2,3,2,3,2,3,3,2,3,3,3,3,2,3,3,4,3,3,3,3,4,3,4,3,4,3,4,4,3,4,4,4,4,4,5,4,4,5],
-  [2,3,2,3,2,3,3,2,3,3,3,3,3,2,4,3,3,3,3,3,4,3,4,3,4,3,4,4,4,3,4,4,4,5,4,4,4,5,4,5,5,4,5,5,5,5,5,5,6],
-  [3,3,3,2,3,4,3,3,3,3,4,3,3,4,3,4,4,3,4,4,4,4,4,4,4,4,5,4,4,5,4,5,5,5,5,5,5,5,5,5,6,5,6,6,5,6,6,6,7],
-  [3,4,3,4,4,3,4,4,4,4,4,4,4,4,4,5,4,5,4,5,5,4,5,5,5,6,5,5,5,6,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,8,7,8],
-  [4,4,4,4,5,4,4,5,4,5,5,5,5,4,6,5,5,5,6,5,6,5,6,6,6,6,6,6,7,6,7,6,7,7,7,7,7,8,7,8,8,8,8,8,8,8,9,9,9]
-];
-let stepSelect = document.getElementById('step_select');
-let startCount = 0;
-let count = 0;
-let battle = 0;
-let level = 1;
-let need = 0;
-let needAll = 150;
-let time = 0;
-let timerID;
-let blinkTime = 0;
-let blinkID;
-display();
+let csv = new XMLHttpRequest();
+csv.open("GET", "data.csv", true);
+csv.send();
 
-function display(){
-  stepSelect = document.getElementById('step_select');
-  checkStartExp();
-  checkExp();
-  display_lv.innerHTML=level;
-  display_bt.innerHTML=battle;
-  display_ct.innerHTML=count;
-  display_need.innerHTML=need;
-  display_needall.innerHTML=needAll;
-  display_sec.innerHTML=time;
-}
+let csvArray = []
+let inputArray = []
+const rareArray = ['とても', 'よく', 'ときどき', 'あまり', 'めったに', 'メタル']
+const etcArray = ['', 'イベント']
+const tableArray1 = ['名前', 'サイズ', '頻度', 'その他']
+const tableArray2 = ['name', 'size', 'rareName', 'etcName']
+const colorArray = ['#d6ffd6', '#d6ffff', '#d6d6ff', '#ffd6ff', '#ffd6d6', '#cccccc']
+let open = 0
 
-function selectChange(){
-  document.getElementById("input_lv").value = "1";
-  stepSelect = document.getElementById('step_select');
-  document.getElementById("input_ct").value = step[stepSelect.value-1][0];
-  needAll = 0;
-  for(const elem of step[stepSelect.value-1]){
-    needAll+=elem;
-  }
-  display();
-}
-
-function checkStartExp(){
-  startCount = 0;
-  let startCheck = document.getElementById("input_lv").value;
-  for(const elem of step[stepSelect.value-1]){
-    if(startCheck===1){startCount+=(elem-document.getElementById("input_ct").value)}
-    startCheck--;
-    if(startCheck<=0) break;
-    startCount+=elem;
+csv.onload = function () {
+  if (csv.status === 200) {
+    let csvText = csv.responseText
+    let lines = csvText.split(/\r?\n/);
+    for (let i = 0; i < lines.length; i++) {
+      let cells = lines[i].split(',');
+      csvArray.push(cells);
+    }
+  } else {
+    console.log("CSVファイルの読み込みに失敗しました。");
   }
 }
 
-function checkExp(){
-  level = 1;
-  let levelCheck = count + startCount;
-  need = 0;
-  need-=levelCheck;
-  battle = levelCheck;
-  for(const elem of step[stepSelect.value-1]){
-    levelCheck-=elem;
-    if(levelCheck>=0){level++;}
-    need+=elem;
+csv.onerror = function () {
+  console.log("CSVファイルの読み込みに失敗しました。");
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const display = []
+  for (let i = 0; i < 12; i++) {
+    display.push('未入力');
+  }
+  document.getElementById('display_input').innerHTML = display.join('<br>')
+});
+
+window.onload = function () {
+  document.getElementById('textarea_input').addEventListener('keydown', function () {
+    if (event.keyCode == 13) {
+      const text = document.getElementById('textarea_input').value.split(/\r?\n/);
+      if (text.length > 11) {
+        event.preventDefault();
+      }
+    }
+  });
+  document.getElementById('menu').addEventListener('click', function () {
+    if (open === 0) {
+      document.getElementById('menu_description').style.display = 'block';
+      open++;
+    } else {
+      document.getElementById('menu_description').style.display = 'none';
+      open = 0
+    }
+  });
+}
+
+function input(elem) {
+  const val = elem.value.split(/\r?\n/);
+  inputArray = []
+  const display = []
+  for (let i = 0; i < 12; i++) {
+    if (i < val.length) {
+      if (val[i] === '') {
+        inputArray[i] = -1
+        display.push('未入力');
+      } else {
+        const index = matchID(val[i]);
+        if (index === -1) {
+          inputArray[i] = -1
+          display.push('該当なし');
+        } else {
+          inputArray[i] = index
+          display.push(`${csvArray[index][1]}(${csvArray[index][3]})`);
+        }
+      }
+    } else {
+      display.push('未入力');
+    }
+  }
+  document.getElementById('display_input').innerHTML = display.join('<br>')
+}
+
+function matchID(input) {
+  let index = -1
+  let i = 0
+  for (const array of csvArray) {
+    if (array[0] === input || array[1] === input) {
+      index = i
+      return index
+    }
+    if (array[1].startsWith(input) || array[2].startsWith(input)) {
+      index = i
+      return index
+    }
+    i++;
+  }
+  return index
+}
+
+function reset() {
+  const mapname = document.getElementById('input_mapname')
+  mapname.value = ''
+  const textarea = document.getElementById('textarea_input')
+  textarea.value = ''
+  input(textarea);
+  const container = document.getElementById('table_result');
+  if (container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
+  const container_score = document.getElementById('container_score');
+  if (container_score.hasChildNodes()) {
+    while (container_score.firstChild) {
+      container_score.removeChild(container_score.firstChild);
+    }
   }
 }
 
-function countup(){
-  count++;
-  display();
-  setTimer();
-  clearBlink();
-  obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = document.getElementById('input_color').value;
-}
-
-function countdown(){
-  if(count>0){
-    count--;
-    display();
+function result() {
+  let resultArray = []
+  for (const array of inputArray) {
+    if (array === -1) continue;
+    resultArray.push({
+      name: csvArray[array][1],
+      size: csvArray[array][3],
+      rare: parseInt(csvArray[array][4]),
+      rareName: rareArray[csvArray[array][4] - 1],
+      etcName: etcArray[csvArray[array][5]]
+    });
   }
-}
+  resultArray.sort((a, b) => a.rare - b.rare);
 
-function reset(){
-  count=0;
-  display();
-  clearTimer();
-  clearBlink();
-}
-
-function timer(){
-  time--;
-  display_sec.innerHTML=time;
-  if(time===0){
-    clearTimer();
-    blinkTime = document.getElementById("input_blinktime").value;
-    blink();
+  const score = check(resultArray);
+  const text = label(score[0])
+  let mob = ''
+  if (score[1] !== -1) {
+    mob = score[1][0].name
   }
+
+  const container = document.getElementById('table_result');
+  if (container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
+  const table = document.createElement('table');
+  container.appendChild(table);
+
+  if (resultArray.length > 0) {
+    let newRow = table.insertRow();
+    for (const p of tableArray1) {
+      let cell = newRow.insertCell();
+      cell.innerHTML = p
+    }
+
+    for (const i of resultArray) {
+      let newRow = table.insertRow();
+      newRow.style.backgroundColor = colorArray[i.rare - 1];
+      for (const p of tableArray2) {
+        let cell = newRow.insertCell();
+        if (i[p] === mob) {
+          cell.style.color = '#ff0000'
+          cell.style.fontWeight = 'bold'
+        }
+        cell.innerHTML = i[p]
+      }
+    }
+  }
+
+  const container_score = document.getElementById('container_score');
+  if (container_score.hasChildNodes()) {
+    while (container_score.firstChild) {
+      container_score.removeChild(container_score.firstChild);
+    }
+  }
+  const div1 = document.createElement('div');
+  container_score.appendChild(div1);
+  div1.style.fontWeight = 'bold'
+  div1.style.textDecoration = "underline"
+  div1.innerHTML = document.getElementById('input_mapname').value
+
+  const div2 = document.createElement('div');
+  const div2text = document.createElement('div');
+  const div2mob = document.createElement('span');
+  div2mob.textContent = mob
+  div2mob.style.color = '#ff0000'
+  div2mob.style.fontWeight = 'bold'
+  div2text.appendChild(div2mob);
+  div2text.appendChild(document.createTextNode(text));
+  div2.appendChild(div2text);
+  container_score.appendChild(div2);
+
+  document.getElementById('scroll').scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function clearTimer(){
-  time = document.getElementById("input_sec").value
-  display_sec.innerHTML=time;
-  clearInterval(timerID);
+function check(result) {
+  let score = [0, -1]
+  const lengthTest = [4, 3, 2, 1, 1, 1]
+  const length = []
+  for (let i = 1; i <= 6; i++) {
+    length.push(result.filter(e => e.rare === i).length);
+  }
+  const size = [
+    result.filter(e => e.rare === 1).filter(e => e.size === '1.0倍'),
+    result.filter(e => e.rare === 2).filter(e => e.size === '1.0倍'),
+    result.filter(e => e.rare === 3).filter(e => e.size === '1.0倍'),
+    result.filter(e => e.rare >= 4).filter(e => e.size === '1.0倍'),
+    result.filter(e => e.rare === 1).filter(e => e.size === '1.2倍')
+  ]
+
+  if (JSON.stringify(lengthTest) === JSON.stringify(length) && result.filter((e, i, arr) => { return arr.findIndex(({ name }) => name === e.name) !== i }).length === 0) {
+    if (size[0].length > 1) {
+      score[0] = 1
+    }
+    if (size[0].length === 1) {
+      if (size[1].length === 0) {
+        if (size[4].length === 0) {
+          score[0] = 2
+          score[1] = size[0]
+        }
+        if (size[4].length === 1) {
+          score[0] = 3
+          score[1] = size[0]
+        }
+        if (size[4].length > 1) {
+          score[0] = 4
+          score[1] = size[0]
+        }
+      } else {
+        score[0] = 1
+      }
+    }
+    if (size[0].length === 0) {
+      if (size[1].length > 1) {
+        score[0] = 1
+      }
+      if (size[1].length === 1) {
+        if (size[4].length === 0) {
+          score[0] = 2
+          score[1] = size[1]
+        }
+        if (size[4].length === 1) {
+          score[0] = 3
+          score[1] = size[1]
+        }
+        if (size[4].length > 1) {
+          score[0] = 4
+          score[1] = size[1]
+        }
+      }
+      if (size[1].length === 0) {
+        if (size[2].length > 1) {
+          score[0] = 1
+        }
+        if (size[2].length === 1) {
+          if (size[4].length === 0) {
+            score[0] = 2
+            score[1] = size[2]
+          }
+          if (size[4].length === 1) {
+            score[0] = 3
+            score[1] = size[2]
+          }
+          if (size[4].length > 1) {
+            score[0] = 4
+            score[1] = size[2]
+          }
+        }
+        if (size[2].length === 0) {
+          if (size[3].length > 1) {
+            score[0] = 6
+          }
+          if (size[3].length === 1) {
+            score[0] = 5
+            score[1] = size[3]
+          }
+          if (size[3].length === 0) {
+            score[0] = 6
+          }
+        }
+      }
+    }
+  } else {
+    return score
+  }
+  return score
 }
 
-function setTimer(){
-  clearTimer();
-  timerID = setInterval(timer, 1000);
-}
-
-function clearBlink(){
-  clearTimeout(blinkID);
-  obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = "#FFFFFF";
-}
-
-function blink() {
-  obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = document.getElementById('input_color').value;
-  blinkTime--;
-  blinkID = setTimeout("blink2()", 100);
-}
-
-function blink2() {
-  obj = document.getElementsByTagName("body");
-  obj[0].style.backgroundColor = "#FFFFFF";
-  blinkTime--;
-  if(blinkTime>0){blinkID = setTimeout("blink()", 100);}
+function label(result) {
+  const scoreArray = [
+    `鑑定不可。入力を確認してください`,
+    `大量発生の特徴はありません`,
+    `が大量発生`,
+    `が大量発生（クランベリー型）`,
+    `が大量発生。ただし４匹編成が減少傾向`,
+    `のみ等倍。大量発生するかは要検証。基本的には４匹編成が出現しにくく、レベリング不向きな構成です`,
+    `４匹編成が出現しにくく、レベリング不向きな構成です`
+  ]
+  return scoreArray[result]
 }
